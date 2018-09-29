@@ -7,20 +7,23 @@ const path = require('path');
 const koaBody = require('koa-body');
 
 const app = new Koa();
-app.use(koaBody({
-    multipart: true
-}))
+
 app.use(bodyParser());
 app.use(koaStatic(
     path.join(__dirname, './www')
 ))
+
+app.use(koaBody({
+    multipart: true
+}))
+
 router.get('/', async (ctx, next) => {
     ctx.body = ctx.req;
 });
 
 router.post('/uploadUrl', async (ctx, next) => {
     // console.log('index');
-    // ctx.body = ctx.req;
+    ctx.body = 'ok'
     console.log(ctx.request.files)
 });
 app.use(router.routes());
